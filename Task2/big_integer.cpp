@@ -138,9 +138,9 @@ big_integer operator*(big_integer& other1, big_integer& other2)
 {
 	big_integer result("0");
 	std::string str1{ other1.number };
-	std::string str2{ other2.number };
+	//std::string str2{ other2.number };
 	unsigned long long len1{ str1.length() };
-	unsigned long long len2{ str2.length() };
+	//unsigned long long len2{ str2.length() };
 	//big_integer bi("0");
 	for (unsigned long long i{len1 - 1}; i < len1; --i)
 	{
