@@ -13,7 +13,7 @@ big_integer::big_integer(std::string str): number{str}
 }
 
 // Конструктор перемещения
-big_integer::big_integer(big_integer&& other)
+big_integer::big_integer(big_integer&& other) noexcept
 {
 	std::swap(this->number, other.number);
 }
@@ -35,7 +35,7 @@ big_integer& big_integer::operator=(big_integer& other)
 }
 
 // Оператор перемещения
-big_integer& big_integer::operator=(big_integer&& other)
+big_integer& big_integer::operator=(big_integer&& other) noexcept
 {
 	std::swap(this->number, other.number);
 	return *this;
@@ -65,7 +65,7 @@ big_integer operator+(big_integer& other1, big_integer& other2)
 		{
 			str1 = '0' + str1;
 		}
-		length = len1;
+		length = len2;
 	}
 	for (int i{ static_cast<int>(length) - 1 }; i >= 0; --i)
 	{
@@ -131,6 +131,27 @@ big_integer operator*(big_integer& other, int number)
 big_integer operator*(int number, big_integer& other)
 {
 	return (other * number);
+}
+
+// Умножение больших чисел
+big_integer operator*(big_integer& other1, big_integer& other2)
+{
+	big_integer result("0");
+	std::string str1{ other1.number };
+	std::string str2{ other2.number };
+	unsigned long long len1{ str1.length() };
+	unsigned long long len2{ str2.length() };
+	//big_integer bi("0");
+	for (unsigned long long i{len1 - 1}; i < len1; --i)
+	{
+		big_integer bi { static_cast<int>(str1[i] - DIGITAL_BOUND) * other2 };
+		for (int j{}; j < (len1 - 1 - i); j++)
+		{
+			bi = bi * 10;
+		}
+		result = result + bi;
+	}
+	return result;
 }
 
 // Перегрузка оператора <<

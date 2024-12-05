@@ -14,19 +14,21 @@ private:
 public:
 	big_integer(std::string str);	// Конструктор, принимающий строку
 
-	big_integer(big_integer&& other);	// Конструктор перемещения
+	big_integer(big_integer&& other) noexcept;	// Конструктор перемещения
 
 	big_integer(big_integer& other);	// Конструктор копирования
 
 	big_integer& operator=(big_integer& other);	// Оператор копирования
 
-	big_integer& operator=(big_integer&& other);	// Оператор перемещения
+	big_integer& operator=(big_integer&& other) noexcept;	// Оператор перемещения
 
 	friend big_integer operator+(big_integer& other1, big_integer& other2);	// Сложения больших чисел
 
 	friend big_integer operator*(big_integer& other, int number);	// Умножение большого числа на int
 
 	friend big_integer operator*(int number, big_integer& other);	// Умножение int на большое число
+
+	friend big_integer operator*(big_integer& other1, big_integer& other2);	// Умножение больших чисел
 
 	friend std::ostream& operator<<(std::ostream& os, const big_integer& bi);	// Перегрузка оператора <<
 };

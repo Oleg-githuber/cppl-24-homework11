@@ -35,6 +35,9 @@ int main()
     std::cout << num1 << " x 2 = " << mul << '\n';
     big_integer mul2 = 25 * num1;
     std::cout << "25 x " << num1 << " = " << mul2 << '\n';
+    big_integer num3{ "333" };
+    big_integer mul3 = num1 * num3;
+    std::cout << num1 << " x " << num3 << " = " << mul3 << '\n';
 
     // Проверка создания объекта с некорректным параметром
     try
